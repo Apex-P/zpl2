@@ -1,0 +1,14 @@
+include: package:flutter_lints/flutter.yaml
+
+linter:
+  rules:
+    - join_return_with_assignment
+    - prefer_single_quotes
+    - lines_longer_than_80_chars
+    - prefer_relative_imports
+    - directives_ordering
+    - prefer_const_constructors
+
+analyzer:
+  plugins:
+    - custom_lint
