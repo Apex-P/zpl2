@@ -5,6 +5,11 @@ import 'package:meta/meta.dart';
 import '../../zpl2.dart';
 
 abstract interface class ZplPrinter {
+  const factory ZplPrinter.network({
+    required InternetAddress networkAddress,
+    required int port,
+  }) = ZplNetworkPrinter;
+
   Future<void> print(ZplElement zplElement);
 }
 
