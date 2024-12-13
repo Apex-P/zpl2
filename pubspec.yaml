@@ -1,6 +1,6 @@
 name: zpl2
 description: "Send ZPL (Zebra Printing Language) commands to Zebra printers."
-version: 0.0.1
+version: 0.1.1
 repository: https://github.com/Apex-P/zpl2
 
 environment:
