@@ -4,7 +4,7 @@ import 'package:meta/meta.dart';
 
 import '../../zpl2.dart';
 
-abstract interface class ZplPrinter {
+sealed class ZplPrinter {
   const factory ZplPrinter.network({
     required InternetAddress networkAddress,
     required int port,
