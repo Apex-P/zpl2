@@ -7,6 +7,9 @@ class EmptyZplElement extends ZplElement {
 
   @override
   String toZpl() => '';
+
+  @override
+  List<Object?> get props => [];
 }
 
 ZplLabel buildZplLabel(

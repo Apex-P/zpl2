@@ -13,6 +13,11 @@ class ZplFont extends ZplCommand {
 
   @override
   String get zpl => _font.zplValue;
+
+  @override
+  List<Object?> get props => [
+        _font,
+      ];
 }
 
 enum ZebraFonts {

@@ -1,10 +1,11 @@
 import 'dart:io';
 
+import 'package:equatable/equatable.dart';
 import 'package:meta/meta.dart';
 
 import '../../zpl2.dart';
 
-sealed class ZplPrinter {
+sealed class ZplPrinter extends Equatable {
   const factory ZplPrinter.network({
     required InternetAddress networkAddress,
     required int port,
@@ -15,7 +16,7 @@ sealed class ZplPrinter {
 
 /// Sends [ZplElement]s over the network to be printed.
 @immutable
-class ZplNetworkPrinter implements ZplPrinter {
+class ZplNetworkPrinter with EquatableMixin implements ZplPrinter {
   /// Zebra printers usually listen to port 9100 by default.
   const ZplNetworkPrinter({
     required this.networkAddress,
@@ -34,4 +35,10 @@ class ZplNetworkPrinter implements ZplPrinter {
     await socket.flush();
     await socket.close();
   }
+
+  @override
+  List<Object?> get props => [
+        networkAddress,
+        port,
+      ];
 }

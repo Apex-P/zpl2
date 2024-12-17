@@ -24,4 +24,12 @@ class ZplText extends ZplElement {
   String toZpl() {
     return '${_fieldOrigin.zpl}${style.zpl}^FD$text^FS';
   }
+
+  @override
+  List<Object?> get props => [
+        text,
+        x,
+        y,
+        style,
+      ];
 }

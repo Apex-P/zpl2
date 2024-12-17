@@ -8,8 +8,10 @@ class ZplLabel extends ZplElement {
     required this.children,
   });
 
+  // TODO: What units?
   final int width;
 
+  // TODO: What units?
   final int height;
 
   final List<ZplElement> children;
@@ -18,4 +20,11 @@ class ZplLabel extends ZplElement {
   String toZpl() {
     return '^XA${children.map((child) => child.toZpl()).join()}^XZ';
   }
+
+  @override
+  List<Object?> get props => [
+        width,
+        height,
+        children,
+      ];
 }

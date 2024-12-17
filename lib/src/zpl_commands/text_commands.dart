@@ -19,4 +19,11 @@ class ZplTextStyle extends ZplCommand {
 
   @override
   String get zpl => '^A${font.zpl}${orientation.zpl},$fontSize';
+
+  @override
+  List<Object?> get props => [
+        font,
+        fontSize,
+        orientation,
+      ];
 }

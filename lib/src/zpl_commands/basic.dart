@@ -1,10 +1,11 @@
+import 'package:equatable/equatable.dart';
 import 'package:meta/meta.dart';
 
 import '../zpl_elements/zpl_element.dart';
 
 /// Components of [ZplElement]s.
 @immutable
-abstract class ZplCommand {
+abstract class ZplCommand extends Equatable {
   const ZplCommand();
 
   String get zpl;
@@ -25,6 +26,12 @@ class FieldOrigin extends ZplCommand {
 
   @override
   String get zpl => '^FO$x,$y';
+
+  @override
+  List<Object?> get props => [
+        x,
+        y,
+      ];
 }
 
 enum ZplOrientation {
