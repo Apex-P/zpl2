@@ -14,3 +14,7 @@ Add ZPL network printer.
 ## 0.2.0
 
 - Add barcode element
+
+## 0.2.1
+
+- Add field origin alignment

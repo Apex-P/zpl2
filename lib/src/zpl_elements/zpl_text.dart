@@ -14,6 +14,7 @@ class ZplText extends ZplDataElement {
     String text, {
     required super.x,
     required super.y,
+    super.alignment = ZplAlignment.left,
     this.style = const ZplTextStyle(),
   }) : super(elementData: text);
 

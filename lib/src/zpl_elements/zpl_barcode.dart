@@ -12,6 +12,7 @@ class ZplBarcode extends ZplDataElement {
     String data, {
     required super.x,
     required super.y,
+    super.alignment = ZplAlignment.left,
     this.barcodeFieldStyle,
     this.barcodeType = const Code128Barcode(),
   }) : super(elementData: data);

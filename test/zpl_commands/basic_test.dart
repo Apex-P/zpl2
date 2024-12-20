@@ -40,4 +40,20 @@ void main() {
     expect(const MockZplCommand(a: 1, c: 3).zpl, '^XX1,,3');
     expect(const MockZplCommand(a: 1, b: 2, c: 3).zpl, '^XX1,2,3');
   });
+
+  group('FieldOrigin', () {
+    test('Default values', () {
+      expect(
+        const FieldOrigin(419, 88).zpl,
+        '^FO419,88,0',
+      );
+    });
+
+    test('Non-default values', () {
+      expect(
+        const FieldOrigin(6, 7, alignment: ZplAlignment.right).zpl,
+        '^FO6,7,1',
+      );
+    });
+  });
 }

@@ -3,7 +3,7 @@ import 'package:zpl2/zpl2.dart';
 
 /// Just an element with empty ZPL.
 class EmptyZplElement extends ZplElement {
-  const EmptyZplElement() : super(x: 0, y: 0);
+  const EmptyZplElement() : super(x: 0, y: 0, alignment: ZplAlignment.left);
 
   @override
   String toZpl() => '';

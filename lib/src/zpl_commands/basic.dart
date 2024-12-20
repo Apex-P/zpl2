@@ -32,14 +32,24 @@ abstract class ZplCommand extends Equatable {
 ///
 /// [x] and [y] are the coordinates for the top left of the current field.
 class FieldOrigin extends ZplCommand {
-  const FieldOrigin(this.x, this.y);
+  const FieldOrigin(
+    this.x,
+    this.y, {
+    this.alignment = ZplAlignment.left,
+  });
 
   final int x;
 
   final int y;
 
+  final ZplAlignment alignment;
+
   @override
-  List<String> get commandParams => [x.toString(), y.toString()];
+  List<String> get commandParams => [
+        x.toString(),
+        y.toString(),
+        alignment.zpl,
+      ];
 
   @override
   String get commandPrefix => 'FO';
@@ -48,6 +58,7 @@ class FieldOrigin extends ZplCommand {
   List<Object?> get props => [
         x,
         y,
+        alignment,
       ];
 }
 
@@ -100,6 +111,20 @@ enum ZplOrientation {
   const ZplOrientation(this.zpl);
 
   /// The ZPL representing this orientation.
+  final String zpl;
+
+  @override
+  String toString() => zpl;
+}
+
+enum ZplAlignment {
+  left('0'),
+  right('1'),
+  automatic('2');
+
+  const ZplAlignment(this.zpl);
+
+  /// The ZPL representing this alignment.
   final String zpl;
 
   @override

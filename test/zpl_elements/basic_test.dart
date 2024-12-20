@@ -1,11 +1,16 @@
 import 'package:flutter_test/flutter_test.dart';
 import 'package:zpl2/zpl2.dart';
 
-import '../zpl_commands/zpl_command_test.dart';
+import '../zpl_commands/basic_test.dart';
 
 class MockZplDataElement extends ZplDataElement {
   const MockZplDataElement(this.numberOfCommands)
-      : super(elementData: '<data>', x: 24, y: 50);
+      : super(
+          elementData: '<data>',
+          x: 24,
+          y: 50,
+          alignment: ZplAlignment.left,
+        );
 
   /// Number of [MockZplCommand]s in [zplCommands].
   final int numberOfCommands;
@@ -25,7 +30,7 @@ class MockZplDataElement extends ZplDataElement {
 
 void main() {
   test('`ZplDataElement` core functionality', () {
-    const expectedStart = '^FO24,50';
+    final expectedStart = '^FO24,50,${ZplAlignment.left.zpl}';
     const expectedEnd = '^FD<data>^FS';
     final expectedCommand = const MockZplCommand(a: 1).zpl;
 

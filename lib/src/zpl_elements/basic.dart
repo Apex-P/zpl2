@@ -13,15 +13,18 @@ abstract class ZplElement extends Equatable {
   const ZplElement({
     required this.x,
     required this.y,
+    required this.alignment,
   });
 
   final int x;
 
   final int y;
 
+  final ZplAlignment alignment;
+
   List<ZplCommand> get zplCommands;
 
-  FieldOrigin get fieldOrigin => FieldOrigin(x, y);
+  FieldOrigin get fieldOrigin => FieldOrigin(x, y, alignment: alignment);
 
   /// Get the actual ZPL to send to the printer.
   ///
@@ -44,6 +47,7 @@ abstract class ZplElement extends Equatable {
   List<Object?> get props => [
         x,
         y,
+        alignment,
       ];
 }
 
@@ -53,6 +57,7 @@ abstract class ZplDataElement extends ZplElement {
     required this.elementData,
     required super.x,
     required super.y,
+    required super.alignment,
   });
 
   /// Data used to build [fieldData].

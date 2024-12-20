@@ -20,8 +20,9 @@ ZplLabel buildZplLabel() {
       ZplText(time, x: 50, y: 70),
       ZplBarcode(
         now.millisecondsSinceEpoch.toString(),
-        x: 200,
+        x: 575,
         y: 50,
+        alignment: ZplAlignment.right,
         barcodeFieldStyle: ZplBarcodeFieldDefault(
           barcodeHeight: 100,
         ),
