@@ -18,3 +18,7 @@ Add ZPL network printer.
 ## 0.2.1
 
 - Add field origin alignment
+
+## 0.2.2
+
+- Add label margins API
