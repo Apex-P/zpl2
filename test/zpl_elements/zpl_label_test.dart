@@ -3,13 +3,16 @@ import 'package:zpl2/zpl2.dart';
 
 /// Just an element with empty ZPL.
 class EmptyZplElement extends ZplElement {
-  const EmptyZplElement();
+  const EmptyZplElement() : super(x: 0, y: 0);
 
   @override
   String toZpl() => '';
 
   @override
-  List<Object?> get props => [];
+  List<Object?> get props => super.props..addAll([]);
+
+  @override
+  List<ZplCommand> get zplCommands => [];
 }
 
 ZplLabel buildZplLabel(

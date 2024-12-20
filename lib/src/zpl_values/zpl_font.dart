@@ -1,8 +1,7 @@
-import '../zpl_elements/zpl_text.dart';
-import 'basic.dart';
+part of '../zpl_elements/zpl_text.dart';
 
 /// Sets the font of a [ZplText].
-class ZplFont extends ZplCommand {
+class ZplFont extends ZplValue {
   const ZplFont() : _font = ZebraFonts.helvetica;
 
   const ZplFont.zebraFont(this._font);

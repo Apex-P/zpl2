@@ -1,7 +1,4 @@
-import 'package:meta/meta.dart';
-
-import 'basic.dart';
-import 'zpl_font.dart';
+part of '../zpl_elements/zpl_text.dart';
 
 @immutable
 class ZplTextStyle extends ZplCommand {
@@ -13,12 +10,19 @@ class ZplTextStyle extends ZplCommand {
 
   final ZplFont font;
 
+  /// Font size in dots.
   final int fontSize;
 
   final ZplOrientation orientation;
 
   @override
-  String get zpl => '^A${font.zpl}${orientation.zpl},$fontSize';
+  List<String> get commandParams => [
+        orientation.zpl,
+        fontSize.toString(),
+      ];
+
+  @override
+  String get commandPrefix => 'A${font.zpl}';
 
   @override
   List<Object?> get props => [

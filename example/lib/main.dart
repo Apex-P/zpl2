@@ -2,10 +2,34 @@ import 'dart:io';
 
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:zpl2/zpl2.dart';
 
 void main() {
   runApp(const MainApp());
+}
+
+ZplLabel buildZplLabel() {
+  final now = DateTime.now();
+  final date = '${now.month}/${now.day}/${now.year}';
+  final time = '${now.hour}:${now.minute}:${now.second}';
+
+  return ZplLabel(
+    children: [
+      ZplText(date, x: 50, y: 35),
+      ZplText(time, x: 50, y: 70),
+      ZplBarcode(
+        now.millisecondsSinceEpoch.toString(),
+        x: 200,
+        y: 50,
+        barcodeFieldStyle: ZplBarcodeFieldDefault(
+          barcodeHeight: 100,
+        ),
+      ),
+    ],
+    height: 200,
+    width: 600,
+  );
 }
 
 class MainApp extends StatelessWidget {
@@ -24,25 +48,12 @@ class MainApp extends StatelessWidget {
               FilledButton(
                 child: const Text('Print'),
                 onPressed: () async {
-                  final now = DateTime.now();
-                  final date = '${now.month}/${now.day}/${now.year}';
-                  final time = '${now.hour}:${now.minute}:${now.second}';
-
                   try {
                     final printer = ZplNetworkPrinter(
                       networkAddress: InternetAddress('10.0.0.13'),
                       port: 9100,
                     );
-                    await printer.print(
-                      ZplLabel(
-                        children: [
-                          ZplText(date, x: 50, y: 35),
-                          ZplText(time, x: 50, y: 70),
-                        ],
-                        height: 50,
-                        width: 150,
-                      ),
-                    );
+                    await printer.print(buildZplLabel());
                   } catch (e) {
                     if (kDebugMode) {
                       print(e);
@@ -52,6 +63,15 @@ class MainApp extends StatelessWidget {
                   if (kDebugMode) {
                     print('Done!');
                   }
+                },
+              ),
+              const SizedBox(height: 16),
+              FilledButton(
+                child: const Text('Copy to Clipboard'),
+                onPressed: () async {
+                  await Clipboard.setData(
+                    ClipboardData(text: buildZplLabel().toZpl()),
+                  );
                 },
               ),
             ],

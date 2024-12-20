@@ -11,10 +11,10 @@ sealed class ZplPrinter extends Equatable {
     required int port,
   }) = ZplNetworkPrinter;
 
-  Future<void> print(ZplElement zplElement);
+  Future<void> print(ZplLabel zplElement);
 }
 
-/// Sends [ZplElement]s over the network to be printed.
+/// Sends [ZplLabel]s over the network to be printed.
 @immutable
 class ZplNetworkPrinter with EquatableMixin implements ZplPrinter {
   /// Zebra printers usually listen to port 9100 by default.
@@ -29,7 +29,7 @@ class ZplNetworkPrinter with EquatableMixin implements ZplPrinter {
 
   /// Throws a [SocketException] upon failure to connect to the printer.
   @override
-  Future<void> print(ZplElement zplElement) async {
+  Future<void> print(ZplLabel zplElement) async {
     final socket = await Socket.connect(networkAddress, port);
     socket.add(zplElement.toZpl().codeUnits);
     await socket.flush();

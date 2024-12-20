@@ -1,14 +1,28 @@
 import 'package:equatable/equatable.dart';
 import 'package:meta/meta.dart';
 
-import '../zpl_elements/zpl_element.dart';
+import '../zpl_elements/basic.dart';
 
 /// Components of [ZplElement]s.
 @immutable
 abstract class ZplCommand extends Equatable {
   const ZplCommand();
 
-  String get zpl;
+  /// This command in ZPL.
+  ///
+  /// You typically do not need to override this; the [zpl] getter is
+  /// responsible for prepending the caret ('^') before the [commandPrefix],
+  /// which is then followed by the list of [commandParams] joined together by
+  /// commas.
+  String get zpl => '^$commandPrefix${commandParams.join(',')}';
+
+  /// The letters following a caret symbol identifying this particular command.
+  ///
+  /// Do NOT include the caret; it is included automatically in [zpl].
+  String get commandPrefix;
+
+  /// The list of individual parameters that follow the [commandPrefix].
+  List<String> get commandParams;
 
   @override
   String toString() => zpl;
@@ -25,12 +39,48 @@ class FieldOrigin extends ZplCommand {
   final int y;
 
   @override
-  String get zpl => '^FO$x,$y';
+  List<String> get commandParams => [x.toString(), y.toString()];
+
+  @override
+  String get commandPrefix => 'FO';
 
   @override
   List<Object?> get props => [
         x,
         y,
+      ];
+}
+
+/// Used to separate consecutive [ZplElement]s.
+class FieldSeparator extends ZplCommand {
+  const FieldSeparator();
+
+  @override
+  List<String> get commandParams => [];
+
+  @override
+  String get commandPrefix => 'FS';
+
+  @override
+  List<Object?> get props => [];
+}
+
+/// Used in elements such as [ZplText] to print element-specific data to a
+/// label.
+class FieldData extends ZplCommand {
+  const FieldData(this.data);
+
+  final String data;
+
+  @override
+  List<String> get commandParams => [data];
+
+  @override
+  String get commandPrefix => 'FD';
+
+  @override
+  List<Object?> get props => [
+        data,
       ];
 }
 
