@@ -67,7 +67,7 @@ class MainApp extends StatelessWidget {
                 },
               ),
               const SizedBox(height: 16),
-              FilledButton(
+              ElevatedButton(
                 child: const Text('Copy to Clipboard'),
                 onPressed: () async {
                   await Clipboard.setData(

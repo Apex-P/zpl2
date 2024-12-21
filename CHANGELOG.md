@@ -22,3 +22,7 @@ Add ZPL network printer.
 ## 0.2.2
 
 - Add label margins API
+
+## 0.2.3
+
+- Add `ZplPrinter.printAll`
