@@ -24,6 +24,24 @@ class ZplTextStyle extends ZplCommand {
   @override
   String get commandPrefix => 'A${font.zpl}';
 
+  @useResult
+  ZplTextStyle copyWith({
+    ZplFont Function()? font,
+    int Function()? fontSize,
+    ZplOrientation Function()? orientation,
+  }) =>
+      ZplTextStyle(
+        font: font != null ? font() : this.font,
+        fontSize: fontSize != null ? fontSize() : this.fontSize,
+        orientation: orientation != null ? orientation() : this.orientation,
+      );
+
+  const ZplTextStyle._({
+    required this.font,
+    required this.fontSize,
+    required this.orientation,
+  });
+
   @override
   List<Object?> get props => [
         font,

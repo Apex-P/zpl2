@@ -26,3 +26,7 @@ Add ZPL network printer.
 ## 0.2.3
 
 - Add `ZplPrinter.printAll`
+
+## 0.2.4
+
+- Add `ZplTextStyle.copyWith`
