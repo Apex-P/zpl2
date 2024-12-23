@@ -1,6 +1,6 @@
 name: zpl2
 description: "Send ZPL (Zebra Printing Language) commands to Zebra printers."
-version: 0.1.2+1
+version: 0.2.4+0
 repository: https://github.com/Apex-P/zpl2
 
 environment:
@@ -8,6 +8,7 @@ environment:
   flutter: ">=1.17.0"
 
 dependencies:
+  decimal: ^3.0.0
   equatable: ^2.0.7
   flutter:
     sdk: flutter

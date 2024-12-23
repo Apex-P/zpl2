@@ -1,35 +1,33 @@
+library zpl_text;
+
+import 'package:meta/meta.dart';
+
 import '../zpl_commands/basic.dart';
-import '../zpl_commands/text_commands.dart';
-import 'zpl_element.dart';
+import '../zpl_values/basic.dart';
+import 'basic.dart';
 
-class ZplText extends ZplElement {
+part '../zpl_commands/text_commands.dart';
+part '../zpl_values/zpl_font.dart';
+
+class ZplText extends ZplDataElement {
   const ZplText(
-    this.text, {
-    required this.x,
-    required this.y,
+    String text, {
+    required super.x,
+    required super.y,
+    super.alignment = ZplAlignment.left,
     this.style = const ZplTextStyle(),
-  });
-
-  final String text;
-
-  final int x;
-
-  final int y;
+  }) : super(elementData: text);
 
   final ZplTextStyle style;
 
-  FieldOrigin get _fieldOrigin => FieldOrigin(x, y);
-
   @override
-  String toZpl() {
-    return '${_fieldOrigin.zpl}${style.zpl}^FD$text^FS';
-  }
-
-  @override
-  List<Object?> get props => [
-        text,
-        x,
-        y,
+  List<ZplCommand> get zplCommands => [
         style,
       ];
+
+  @override
+  List<Object?> get props => super.props
+    ..addAll([
+      style,
+    ]);
 }

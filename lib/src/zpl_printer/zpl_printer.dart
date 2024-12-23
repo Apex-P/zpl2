@@ -6,17 +6,23 @@ import 'package:meta/meta.dart';
 import '../../zpl2.dart';
 
 sealed class ZplPrinter extends Equatable {
+  const ZplPrinter();
+
   const factory ZplPrinter.network({
     required InternetAddress networkAddress,
     required int port,
   }) = ZplNetworkPrinter;
 
-  Future<void> print(ZplElement zplElement);
+  Future<void> print(ZplLabel label) async {
+    return await printAll([label]);
+  }
+
+  Future<void> printAll(Iterable<ZplLabel> labels);
 }
 
-/// Sends [ZplElement]s over the network to be printed.
+/// Sends [ZplLabel]s over the network to be printed.
 @immutable
-class ZplNetworkPrinter with EquatableMixin implements ZplPrinter {
+class ZplNetworkPrinter extends ZplPrinter {
   /// Zebra printers usually listen to port 9100 by default.
   const ZplNetworkPrinter({
     required this.networkAddress,
@@ -29,11 +35,16 @@ class ZplNetworkPrinter with EquatableMixin implements ZplPrinter {
 
   /// Throws a [SocketException] upon failure to connect to the printer.
   @override
-  Future<void> print(ZplElement zplElement) async {
+  Future<void> printAll(Iterable<ZplLabel> labels) async {
     final socket = await Socket.connect(networkAddress, port);
-    socket.add(zplElement.toZpl().codeUnits);
+    socket.add(labelsToZpl(labels).codeUnits);
     await socket.flush();
     await socket.close();
+  }
+
+  String labelsToZpl(Iterable<ZplLabel> labels) {
+    final zplByLabel = labels.map((element) => element.toZpl());
+    return zplByLabel.join();
   }
 
   @override
