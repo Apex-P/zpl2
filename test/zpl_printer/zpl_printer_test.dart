@@ -14,12 +14,9 @@ ZplNetworkPrinter buildNetworkPrinter() {
 void main() {
   test('[ZplNetworkPrinter.labelsToZpl]', () {
     final printer = buildNetworkPrinter();
-    const label = ZplLabel(children: [], width: 0, height: 0);
+    const label = ZplRectangleLabel(children: [], width: 0, height: 0);
 
-    expect(
-      printer.labelsToZpl([label]),
-      label.toZpl(),
-    );
+    expect(printer.labelsToZpl([label]), label.toZpl());
     expect(
       printer.labelsToZpl([label, label]),
       '${label.toZpl()}${label.toZpl()}',

@@ -30,7 +30,7 @@ class ZplTextStyle extends ZplCommand {
     int Function()? fontSize,
     ZplOrientation Function()? orientation,
   }) =>
-      ZplTextStyle(
+      ZplTextStyle._(
         font: font != null ? font() : this.font,
         fontSize: fontSize != null ? fontSize() : this.fontSize,
         orientation: orientation != null ? orientation() : this.orientation,

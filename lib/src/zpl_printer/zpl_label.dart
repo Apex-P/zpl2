@@ -5,15 +5,12 @@ import '../zpl_elements/basic.dart';
 /// Put many [ZplElement]s onto a single [ZplLabel].
 ///
 /// This is what you typically send to the printer.
-class ZplLabel extends Equatable {
+sealed class ZplLabel extends Equatable {
   const ZplLabel({
     required this.children,
     required this.width,
     required this.height,
-    this.margins = const ZplLabelMargins.symmetric(
-      horizontal: 20,
-      vertical: 15,
-    ),
+    required this.margins,
   });
 
   final List<ZplElement> children;
@@ -46,18 +43,41 @@ class ZplLabel extends Equatable {
   int get leftMargin => margins.leftMargin;
 
   @override
-  List<Object?> get props => [
-        children,
-        width,
-        height,
-        margins,
-      ];
+  List<Object?> get props => [children, width, height, margins];
+}
+
+class ZplRectangleLabel extends ZplLabel {
+  const ZplRectangleLabel({
+    required super.children,
+    required super.width,
+    required super.height,
+    super.margins = const ZplLabelMargins.symmetric(
+      horizontal: 20,
+      vertical: 15,
+    ),
+  });
+}
+
+class ZplBarbellLabel extends ZplLabel {
+  const ZplBarbellLabel({
+    required super.children,
+    required super.width,
+    required super.height,
+    required super.margins,
+  });
 }
 
 /// Describes the desired margins of the [ZplLabel].
 ///
 /// The unit of all of the margin attributes are dots.
 class ZplLabelMargins extends Equatable {
+  const ZplLabelMargins({
+    required this.topMargin,
+    required this.rightMargin,
+    required this.bottomMargin,
+    required this.leftMargin,
+  });
+
   const ZplLabelMargins.only({
     this.topMargin = 0,
     this.rightMargin = 0,
@@ -66,18 +86,16 @@ class ZplLabelMargins extends Equatable {
   });
 
   const ZplLabelMargins.all(int margin)
-      : topMargin = margin,
-        rightMargin = margin,
-        bottomMargin = margin,
-        leftMargin = margin;
+    : topMargin = margin,
+      rightMargin = margin,
+      bottomMargin = margin,
+      leftMargin = margin;
 
-  const ZplLabelMargins.symmetric({
-    int horizontal = 0,
-    int vertical = 0,
-  })  : topMargin = horizontal,
-        bottomMargin = horizontal,
-        rightMargin = vertical,
-        leftMargin = vertical;
+  const ZplLabelMargins.symmetric({int horizontal = 0, int vertical = 0})
+    : topMargin = horizontal,
+      bottomMargin = horizontal,
+      rightMargin = vertical,
+      leftMargin = vertical;
 
   final int topMargin;
 
@@ -88,10 +106,26 @@ class ZplLabelMargins extends Equatable {
   final int leftMargin;
 
   @override
-  List<Object?> get props => [
-        topMargin,
-        rightMargin,
-        bottomMargin,
-        leftMargin,
-      ];
+  List<Object?> get props => [topMargin, rightMargin, bottomMargin, leftMargin];
+}
+
+class ZplBarbellLabelMargins extends ZplLabelMargins {
+  const ZplBarbellLabelMargins.only({
+    super.topMargin = 0,
+    super.bottomMargin = 0,
+    super.leftMargin = 0,
+    super.rightMargin = 0,
+    this.middleLeftwardMargin = 0,
+    this.middleRightwardMargin = 0,
+  });
+
+  /// The margin from the middle "barbell handel" to the left.
+  final int middleLeftwardMargin;
+
+  /// The margin from the middle "barbell handel" to the right.
+  final int middleRightwardMargin;
+
+  @override
+  List<Object?> get props =>
+      super.props..addAll([middleLeftwardMargin, middleRightwardMargin]);
 }

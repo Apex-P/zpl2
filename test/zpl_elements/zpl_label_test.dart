@@ -20,7 +20,7 @@ ZplLabel buildZplLabel(
   int width = 0,
   int height = 0,
 }) {
-  return ZplLabel(width: width, height: height, children: children);
+  return ZplRectangleLabel(width: width, height: height, children: children);
 }
 
 void main() {
@@ -40,10 +40,7 @@ void main() {
       const text2 = ZplText('text 2', x: 1, y: 2);
       final label = buildZplLabel([text1, text2]);
 
-      expect(
-        label.toZpl(),
-        '^XA${text1.toZpl()}${text2.toZpl()}^XZ',
-      );
+      expect(label.toZpl(), '^XA${text1.toZpl()}${text2.toZpl()}^XZ');
     });
   });
 }

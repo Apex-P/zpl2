@@ -14,7 +14,7 @@ ZplLabel buildZplLabel() {
   final date = '${now.month}/${now.day}/${now.year}';
   final time = '${now.hour}:${now.minute}:${now.second}';
 
-  return ZplLabel(
+  return ZplRectangleLabel(
     children: [
       ZplText(date, x: 50, y: 35),
       ZplText(time, x: 50, y: 70),
