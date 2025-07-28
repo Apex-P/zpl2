@@ -63,7 +63,11 @@ class ZplBarbellLabel extends ZplLabel {
     required super.children,
     required super.width,
     required super.height,
-    required super.margins,
+    super.margins = const ZplBarbellLabelMargins.symmetric(
+      outerHorizontal: 20,
+      innerHorizontal: 20,
+      vertical: 15,
+    ),
   });
 }
 
@@ -118,6 +122,19 @@ class ZplBarbellLabelMargins extends ZplLabelMargins {
     this.middleLeftwardMargin = 0,
     this.middleRightwardMargin = 0,
   });
+
+  const ZplBarbellLabelMargins.symmetric({
+    int outerHorizontal = 0,
+    int innerHorizontal = 0,
+    int vertical = 0,
+  }) : middleLeftwardMargin = innerHorizontal,
+       middleRightwardMargin = innerHorizontal,
+       super(
+         bottomMargin: vertical,
+         topMargin: vertical,
+         leftMargin: outerHorizontal,
+         rightMargin: outerHorizontal,
+       );
 
   /// The margin from the middle "barbell handel" to the left.
   final int middleLeftwardMargin;
