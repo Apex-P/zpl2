@@ -21,13 +21,8 @@ class ZplText extends ZplDataElement {
   final ZplTextStyle style;
 
   @override
-  List<ZplCommand> get zplCommands => [
-        style,
-      ];
+  List<ZplCommand> get zplCommands => [style];
 
   @override
-  List<Object?> get props => super.props
-    ..addAll([
-      style,
-    ]);
+  List<Object?> get props => super.props..addAll([style]);
 }

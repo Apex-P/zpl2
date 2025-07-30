@@ -8,8 +8,8 @@ class ZplBarcodeFieldDefault extends ZplCommand {
     this.moduleWidth,
     this.wideToNarrowBarRatio,
     this.barcodeHeight,
-  })  : assert(wideToNarrowBarRatio == null || wideToNarrowBarRatio.scale <= 1),
-        assert(moduleWidth == null || (moduleWidth >= 1 && moduleWidth <= 10));
+  }) : assert(wideToNarrowBarRatio == null || wideToNarrowBarRatio.scale <= 1),
+       assert(moduleWidth == null || (moduleWidth >= 1 && moduleWidth <= 10));
 
   /// Width in dots (of I guess the smallest barcode unit?)
   final int? moduleWidth;
@@ -24,34 +24,28 @@ class ZplBarcodeFieldDefault extends ZplCommand {
 
   @override
   List<String> get commandParams => [
-        moduleWidth.nullToEmptyString(),
-        wideToNarrowBarRatio.nullToEmptyString(),
-        barcodeHeight.nullToEmptyString(),
-      ];
+    moduleWidth.nullToEmptyString(),
+    wideToNarrowBarRatio.nullToEmptyString(),
+    barcodeHeight.nullToEmptyString(),
+  ];
 
   @override
   String get commandPrefix => 'BY';
 
   @override
-  List<Object?> get props => [
-        moduleWidth,
-        wideToNarrowBarRatio,
-        barcodeHeight,
-      ];
+  List<Object?> get props => [moduleWidth, wideToNarrowBarRatio, barcodeHeight];
 }
 
 sealed class ZplBarcodeType extends ZplCommand {
-  const ZplBarcodeType();
-}
-
-class Code128Barcode extends ZplBarcodeType {
-  const Code128Barcode({
+  const ZplBarcodeType({
     this.orientation = ZplOrientation.normal,
     this.barcodeHeight,
     this.printInterpretationLine = true,
     this.printInterpretationLineAboveCode = false,
-  }) : assert(barcodeHeight == null ||
-            (barcodeHeight >= 1 && barcodeHeight <= 32000));
+  }) : assert(
+         barcodeHeight == null ||
+             (barcodeHeight >= 1 && barcodeHeight <= 32000),
+       );
 
   final ZplOrientation orientation;
 
@@ -72,9 +66,6 @@ class Code128Barcode extends ZplBarcodeType {
   ZplBoolean get _printInterpretationLineAboveCode =>
       ZplBoolean(printInterpretationLineAboveCode);
 
-  @override
-  String get commandPrefix => 'BC';
-
   // Using these one-letter getters to make it easier to follow along with the
   // "ZPL II Programming Guide".
   @override
@@ -89,9 +80,33 @@ class Code128Barcode extends ZplBarcodeType {
 
   @override
   List<Object?> get props => [
-        orientation,
-        barcodeHeight,
-        printInterpretationLine,
-        printInterpretationLineAboveCode,
-      ];
+    orientation,
+    barcodeHeight,
+    printInterpretationLine,
+    printInterpretationLineAboveCode,
+  ];
+}
+
+class Code128Barcode extends ZplBarcodeType {
+  const Code128Barcode({
+    super.orientation,
+    super.barcodeHeight,
+    super.printInterpretationLine,
+    super.printInterpretationLineAboveCode,
+  });
+
+  @override
+  String get commandPrefix => 'BC';
+}
+
+class Code39Barcode extends ZplBarcodeType {
+  const Code39Barcode({
+    super.orientation,
+    super.barcodeHeight,
+    super.printInterpretationLine,
+    super.printInterpretationLineAboveCode,
+  });
+
+  @override
+  String get commandPrefix => 'B3';
 }

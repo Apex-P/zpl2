@@ -8,10 +8,7 @@ void main() {
       '12/12/2024',
       x: fo.x,
       y: fo.y,
-      style: ZplTextStyle(
-        font: ZplFont.helvetica(),
-        fontSize: 16,
-      ),
+      style: ZplTextStyle(font: ZplFont.helvetica(), fontSize: 16),
     );
     expect(text.toZpl(), '${fo.zpl}^A0N,16^FD12/12/2024^FS');
   });

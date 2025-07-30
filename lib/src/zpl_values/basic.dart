@@ -17,7 +17,5 @@ class ZplBoolean extends ZplValue {
   String get zpl => value ? 'Y' : 'N';
 
   @override
-  List<Object?> get props => [
-        value,
-      ];
+  List<Object?> get props => [value];
 }

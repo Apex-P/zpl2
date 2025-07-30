@@ -5,10 +5,7 @@ import 'package:zpl2/zpl2.dart';
 void main() {
   group('Code128Barcode', () {
     test('Default values', () {
-      expect(
-        const Code128Barcode().zpl,
-        '^BCN,,Y,N,,',
-      );
+      expect(const Code128Barcode().zpl, '^BCN,,Y,N,,');
     });
 
     test('Non-default values', () {
@@ -25,10 +22,7 @@ void main() {
 
   group('ZplBarcodeFieldDefault', () {
     test('Default values', () {
-      expect(
-        ZplBarcodeFieldDefault().zpl,
-        '^BY,,',
-      );
+      expect(ZplBarcodeFieldDefault().zpl, '^BY,,');
     });
 
     test('Non-default values', () {

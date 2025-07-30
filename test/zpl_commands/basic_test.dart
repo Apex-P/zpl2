@@ -3,11 +3,7 @@ import 'package:zpl2/src/extensions/null_to_empty_string.dart';
 import 'package:zpl2/zpl2.dart';
 
 class MockZplCommand extends ZplCommand {
-  const MockZplCommand({
-    this.a,
-    this.b,
-    this.c,
-  });
+  const MockZplCommand({this.a, this.b, this.c});
 
   final int? a;
 
@@ -17,20 +13,16 @@ class MockZplCommand extends ZplCommand {
 
   @override
   List<String> get commandParams => [
-        a.nullToEmptyString(),
-        b.nullToEmptyString(),
-        c.nullToEmptyString(),
-      ];
+    a.nullToEmptyString(),
+    b.nullToEmptyString(),
+    c.nullToEmptyString(),
+  ];
 
   @override
   String get commandPrefix => 'XX';
 
   @override
-  List<Object?> get props => [
-        a,
-        b,
-        c,
-      ];
+  List<Object?> get props => [a, b, c];
 }
 
 void main() {
@@ -43,10 +35,7 @@ void main() {
 
   group('FieldOrigin', () {
     test('Default values', () {
-      expect(
-        const FieldOrigin(419, 88).zpl,
-        '^FO419,88,0',
-      );
+      expect(const FieldOrigin(419, 88).zpl, '^FO419,88,0');
     });
 
     test('Non-default values', () {

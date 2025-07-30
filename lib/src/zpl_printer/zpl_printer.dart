@@ -24,10 +24,7 @@ sealed class ZplPrinter extends Equatable {
 @immutable
 class ZplNetworkPrinter extends ZplPrinter {
   /// Zebra printers usually listen to port 9100 by default.
-  const ZplNetworkPrinter({
-    required this.networkAddress,
-    required this.port,
-  });
+  const ZplNetworkPrinter({required this.networkAddress, required this.port});
 
   final InternetAddress networkAddress;
 
@@ -48,8 +45,5 @@ class ZplNetworkPrinter extends ZplPrinter {
   }
 
   @override
-  List<Object?> get props => [
-        networkAddress,
-        port,
-      ];
+  List<Object?> get props => [networkAddress, port];
 }

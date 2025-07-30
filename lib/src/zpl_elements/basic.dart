@@ -10,11 +10,7 @@ import 'zpl_text.dart';
 /// [toZpl] is exactly what gets sent to the printer.
 @immutable
 abstract class ZplElement extends Equatable {
-  const ZplElement({
-    required this.x,
-    required this.y,
-    required this.alignment,
-  });
+  const ZplElement({required this.x, required this.y, required this.alignment});
 
   final int x;
 
@@ -44,11 +40,7 @@ abstract class ZplElement extends Equatable {
       zplCommands.map((command) => command.zpl).join();
 
   @override
-  List<Object?> get props => [
-        x,
-        y,
-        alignment,
-      ];
+  List<Object?> get props => [x, y, alignment];
 }
 
 /// A [ZplElement] with a [FieldData] command (e.g., [ZplText], [ZplBarcode]).
@@ -70,8 +62,5 @@ abstract class ZplDataElement extends ZplElement {
       [...zplCommands, fieldData].map((command) => command.zpl).join();
 
   @override
-  List<Object?> get props => super.props
-    ..addAll([
-      elementData,
-    ]);
+  List<Object?> get props => super.props..addAll([elementData]);
 }

@@ -16,21 +16,15 @@ void main() {
   test('[ZplTextStyle.copyWith]', () {
     const originalStyle = ZplTextStyle();
     expect(
-      originalStyle.copyWith(
-        fontSize: () => 16,
-      ),
+      originalStyle.copyWith(fontSize: () => 16),
       const ZplTextStyle(fontSize: 16),
     );
     expect(
-      originalStyle.copyWith(
-        font: () => ZplFont.helvetica(),
-      ),
+      originalStyle.copyWith(font: () => ZplFont.helvetica()),
       const ZplTextStyle(),
     );
     expect(
-      originalStyle.copyWith(
-        orientation: () => ZplOrientation.rotated,
-      ),
+      originalStyle.copyWith(orientation: () => ZplOrientation.rotated),
       const ZplTextStyle(orientation: ZplOrientation.rotated),
     );
     expect(
@@ -38,10 +32,7 @@ void main() {
         fontSize: () => 72,
         orientation: () => ZplOrientation.rotated,
       ),
-      const ZplTextStyle(
-        fontSize: 72,
-        orientation: ZplOrientation.rotated,
-      ),
+      const ZplTextStyle(fontSize: 72, orientation: ZplOrientation.rotated),
     );
   });
 }

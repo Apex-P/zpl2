@@ -23,14 +23,11 @@ class ZplBarcode extends ZplDataElement {
 
   @override
   List<ZplCommand> get zplCommands => [
-        barcodeFieldStyle ?? ZplBarcodeFieldDefault(),
-        barcodeType,
-      ];
+    barcodeFieldStyle ?? ZplBarcodeFieldDefault(),
+    barcodeType,
+  ];
 
   @override
-  List<Object?> get props => super.props
-    ..addAll([
-      barcodeFieldStyle,
-      barcodeType,
-    ]);
+  List<Object?> get props =>
+      super.props..addAll([barcodeFieldStyle, barcodeType]);
 }

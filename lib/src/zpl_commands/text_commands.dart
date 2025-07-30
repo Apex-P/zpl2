@@ -16,10 +16,7 @@ class ZplTextStyle extends ZplCommand {
   final ZplOrientation orientation;
 
   @override
-  List<String> get commandParams => [
-        orientation.zpl,
-        fontSize.toString(),
-      ];
+  List<String> get commandParams => [orientation.zpl, fontSize.toString()];
 
   @override
   String get commandPrefix => 'A${font.zpl}';
@@ -29,12 +26,11 @@ class ZplTextStyle extends ZplCommand {
     ZplFont Function()? font,
     int Function()? fontSize,
     ZplOrientation Function()? orientation,
-  }) =>
-      ZplTextStyle._(
-        font: font != null ? font() : this.font,
-        fontSize: fontSize != null ? fontSize() : this.fontSize,
-        orientation: orientation != null ? orientation() : this.orientation,
-      );
+  }) => ZplTextStyle._(
+    font: font != null ? font() : this.font,
+    fontSize: fontSize != null ? fontSize() : this.fontSize,
+    orientation: orientation != null ? orientation() : this.orientation,
+  );
 
   const ZplTextStyle._({
     required this.font,
@@ -43,9 +39,5 @@ class ZplTextStyle extends ZplCommand {
   });
 
   @override
-  List<Object?> get props => [
-        font,
-        fontSize,
-        orientation,
-      ];
+  List<Object?> get props => [font, fontSize, orientation];
 }
