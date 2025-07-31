@@ -1,6 +1,6 @@
 import 'package:equatable/equatable.dart';
 
-import '../zpl_elements/basic.dart';
+import '../zpl_elements/zpl_element.dart';
 
 /// Put many [ZplElement]s onto a single [ZplLabel].
 ///
@@ -59,16 +59,21 @@ class ZplRectangleLabel extends ZplLabel {
 }
 
 class ZplBarbellLabel extends ZplLabel {
-  const ZplBarbellLabel({
+  ZplBarbellLabel({
     required super.children,
     required super.width,
     required super.height,
-    super.margins = const ZplBarbellLabelMargins.symmetric(
-      outerHorizontal: 20,
-      innerHorizontal: 20,
-      vertical: 15,
-    ),
-  });
+
+    /// If null, a default value is used.
+    ZplBarbellLabelMargins? margins,
+  }) : super(
+         margins: ZplBarbellLabelMargins.symmetric(
+           outerHorizontal: 20,
+           innerHorizontal: 20,
+           vertical: 15,
+           labelMidpoint: width ~/ 2,
+         ),
+       );
 }
 
 /// Describes the desired margins of the [ZplLabel].
@@ -127,8 +132,9 @@ class ZplBarbellLabelMargins extends ZplLabelMargins {
     int outerHorizontal = 0,
     int innerHorizontal = 0,
     int vertical = 0,
-  }) : middleLeftwardMargin = innerHorizontal,
-       middleRightwardMargin = innerHorizontal,
+    required int labelMidpoint,
+  }) : middleLeftwardMargin = labelMidpoint - innerHorizontal,
+       middleRightwardMargin = labelMidpoint + innerHorizontal,
        super(
          bottomMargin: vertical,
          topMargin: vertical,

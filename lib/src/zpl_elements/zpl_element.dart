@@ -1,7 +1,7 @@
 import 'package:equatable/equatable.dart';
 import 'package:meta/meta.dart';
 
-import '../zpl_commands/basic.dart';
+import '../zpl_commands/zpl_command.dart';
 import 'zpl_barcode.dart';
 import 'zpl_text.dart';
 

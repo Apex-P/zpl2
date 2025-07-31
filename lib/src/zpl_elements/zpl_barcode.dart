@@ -1,9 +1,9 @@
 import 'package:decimal/decimal.dart';
 
 import '../extensions/null_to_empty_string.dart';
-import '../zpl_commands/basic.dart';
-import '../zpl_values/basic.dart';
-import 'basic.dart';
+import '../zpl_commands/zpl_command.dart';
+import '../zpl_values/zpl_value.dart';
+import 'zpl_element.dart';
 
 part '../zpl_commands/barcode_commands.dart';
 

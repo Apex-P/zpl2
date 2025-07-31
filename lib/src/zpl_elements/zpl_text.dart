@@ -2,9 +2,9 @@ library zpl_text;
 
 import 'package:meta/meta.dart';
 
-import '../zpl_commands/basic.dart';
-import '../zpl_values/basic.dart';
-import 'basic.dart';
+import '../zpl_commands/zpl_command.dart';
+import '../zpl_values/zpl_value.dart';
+import 'zpl_element.dart';
 
 part '../zpl_commands/text_commands.dart';
 part '../zpl_values/zpl_font.dart';

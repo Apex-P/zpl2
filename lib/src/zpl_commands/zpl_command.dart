@@ -1,7 +1,7 @@
 import 'package:equatable/equatable.dart';
 import 'package:meta/meta.dart';
 
-import '../zpl_elements/basic.dart';
+import '../zpl_elements/zpl_element.dart';
 
 /// Components of [ZplElement]s.
 @immutable
