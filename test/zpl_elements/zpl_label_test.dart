@@ -36,8 +36,8 @@ void main() {
     });
 
     test('Label with multiple text fields', () {
-      const text1 = ZplText('text 1', x: 0, y: 0);
-      const text2 = ZplText('text 2', x: 1, y: 2);
+      final text1 = ZplText('text 1', x: 0, y: 0);
+      final text2 = ZplText('text 2', x: 1, y: 2);
       final label = buildZplLabel([text1, text2]);
 
       expect(label.toZpl(), '^XA${text1.toZpl()}${text2.toZpl()}^XZ');

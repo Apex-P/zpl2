@@ -5,7 +5,7 @@ import '../../zpl2.dart';
 /// Similar to [ZplText] but used to wrap the given text within a certain
 /// width.
 class ZplTextBlock extends ZplText {
-  const ZplTextBlock(
+  ZplTextBlock(
     super.text, {
     required super.x,
     required super.y,

@@ -10,13 +10,13 @@ part '../zpl_commands/text_commands.dart';
 part '../zpl_values/zpl_font.dart';
 
 class ZplText extends ZplDataElement {
-  const ZplText(
+  ZplText(
     String text, {
     required super.x,
     required super.y,
     super.alignment = ZplAlignment.left,
     this.style = const ZplTextStyle(),
-  }) : super(elementData: text);
+  }) : super(elementData: text.replaceAll(RegExp(r'(\r\n|\r|\n)'), r'\&'));
 
   final ZplTextStyle style;
 
