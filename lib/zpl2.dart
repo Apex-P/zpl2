@@ -1,4 +1,4 @@
-library zpl2;
+library;
 
 export 'src/zpl_commands/zpl_command.dart';
 export 'src/zpl_elements/zpl_barcode.dart';

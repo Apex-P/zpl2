@@ -8,7 +8,10 @@ linter:
     - prefer_relative_imports
     - directives_ordering
     - prefer_const_constructors
+    - prefer_const_constructors_in_immutables
+    - always_declare_return_types
+    - unnecessary_breaks
 
 analyzer:
-  plugins:
-    - custom_lint
+  exclude:
+    - build/**

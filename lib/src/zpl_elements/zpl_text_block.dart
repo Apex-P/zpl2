@@ -1,4 +1,4 @@
-library zpl_text_block;
+library;
 
 import '../../zpl2.dart';
 
@@ -14,7 +14,7 @@ class ZplTextBlock extends ZplText {
     /// The alignment of this element's origin (defined by [x] an [y]).
     ///
     /// For the alignment of the actual [text] within this block, see
-    /// [ZplTextBlockCommand.textJustification]
+    /// [ZplTextBlockCommand.textJustification].
     super.alignment = ZplAlignment.left,
     super.style,
   });

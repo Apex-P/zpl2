@@ -1,4 +1,4 @@
-library zpl_text;
+library;
 
 import 'package:meta/meta.dart';
 
