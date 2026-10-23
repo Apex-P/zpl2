@@ -27,12 +27,12 @@ void main() {
   group('Label adds ZPL "begin" and "end" commands.', () {
     test('Label has no children', () {
       final label = buildZplLabel([]);
-      expect(label.toZpl(), '^XA^XZ');
+      expect(label.toZpl(), '^XA^CI28^XZ');
     });
 
     test('Label children ZPL result is empty', () {
       final label = buildZplLabel([const EmptyZplElement()]);
-      expect(label.toZpl(), '^XA^XZ');
+      expect(label.toZpl(), '^XA^CI28^XZ');
     });
 
     test('Label with multiple text fields', () {
@@ -40,7 +40,14 @@ void main() {
       final text2 = ZplText('text 2', x: 1, y: 2);
       final label = buildZplLabel([text1, text2]);
 
-      expect(label.toZpl(), '^XA${text1.toZpl()}${text2.toZpl()}^XZ');
+      expect(label.toZpl(), '^XA^CI28${text1.toZpl()}${text2.toZpl()}^XZ');
+    });
+
+    test('Barbell label with a text field', () {
+      final text = ZplText('text', x: 0, y: 0);
+      final label = ZplBarbellLabel(width: 0, height: 0, children: [text]);
+
+      expect(label.toZpl(), '^XA^CI28${text.toZpl()}^XZ');
     });
   });
 }

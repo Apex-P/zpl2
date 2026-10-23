@@ -26,8 +26,10 @@ sealed class ZplLabel extends Equatable {
   final ZplLabelMargins margins;
 
   /// The actual ZPL sent to the printer.
+  ///
+  /// Declares (with `^CI28`) that its field data is encoded in UTF-8.
   String toZpl() {
-    return '^XA${children.map((child) => child.toZpl()).join()}^XZ';
+    return '^XA^CI28${children.map((child) => child.toZpl()).join()}^XZ';
   }
 
   /// The y-value (in dots) of the location of the top margin.
