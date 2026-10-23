@@ -1,9 +1,10 @@
+import 'dart:convert';
 import 'dart:io';
 
 import 'package:equatable/equatable.dart';
 import 'package:meta/meta.dart';
 
-import '../../zpl2.dart';
+import 'zpl_label.dart';
 
 sealed class ZplPrinter extends Equatable {
   const ZplPrinter();
@@ -11,6 +12,7 @@ sealed class ZplPrinter extends Equatable {
   const factory ZplPrinter.network({
     required InternetAddress networkAddress,
     required int port,
+    Duration connectTimeout,
   }) = ZplNetworkPrinter;
 
   Future<void> print(ZplLabel label) async {
@@ -24,19 +26,40 @@ sealed class ZplPrinter extends Equatable {
 @immutable
 class ZplNetworkPrinter extends ZplPrinter {
   /// Zebra printers usually listen to port 9100 by default.
-  const ZplNetworkPrinter({required this.networkAddress, required this.port});
+  const ZplNetworkPrinter({
+    required this.networkAddress,
+    required this.port,
+    this.connectTimeout = const Duration(seconds: 10),
+  });
 
   final InternetAddress networkAddress;
 
   final int port;
 
-  /// Throws a [SocketException] upon failure to connect to the printer.
+  /// How long [printAll] waits to connect to the printer before giving up.
+  final Duration connectTimeout;
+
+  /// Throws a [SocketException] upon failure to connect to the printer,
+  /// including when it does not connect within [connectTimeout].
+  ///
+  /// Builds every label before connecting, so a label that throws never opens
+  /// a connection.
   @override
   Future<void> printAll(Iterable<ZplLabel> labels) async {
-    final socket = await Socket.connect(networkAddress, port);
-    socket.add(labelsToZpl(labels).codeUnits);
-    await socket.flush();
-    await socket.close();
+    final zplBytes = utf8.encode(labelsToZpl(labels));
+    final socket = await Socket.connect(
+      networkAddress,
+      port,
+      timeout: connectTimeout,
+    );
+    try {
+      socket.add(zplBytes);
+      await socket.flush();
+      await socket.close();
+    } catch (_) {
+      socket.destroy();
+      rethrow;
+    }
   }
 
   String labelsToZpl(Iterable<ZplLabel> labels) {
@@ -45,5 +68,5 @@ class ZplNetworkPrinter extends ZplPrinter {
   }
 
   @override
-  List<Object?> get props => [networkAddress, port];
+  List<Object?> get props => [networkAddress, port, connectTimeout];
 }

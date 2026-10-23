@@ -78,6 +78,12 @@ sealed class ZplBarcodeType extends ZplCommand {
   String get _e => '';
   String get _m => '';
 
+  /// The name of this barcode type, for error messages.
+  String get _name;
+
+  /// Whether this barcode type can encode [character], a Unicode code point.
+  bool _canEncode(int character);
+
   @override
   List<Object?> get props => [
     orientation,
@@ -97,6 +103,13 @@ class Code128Barcode extends ZplBarcodeType {
 
   @override
   String get commandPrefix => 'BC';
+
+  @override
+  String get _name => 'Code 128';
+
+  /// Code 128 encodes the 128 ASCII characters.
+  @override
+  bool _canEncode(int character) => character <= 0x7F;
 }
 
 class Code39Barcode extends ZplBarcodeType {
@@ -109,4 +122,12 @@ class Code39Barcode extends ZplBarcodeType {
 
   @override
   String get commandPrefix => 'B3';
+
+  static const _characters = '0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ -.\$/+%';
+
+  @override
+  String get _name => 'Code 39';
+
+  @override
+  bool _canEncode(int character) => _characters.runes.contains(character);
 }

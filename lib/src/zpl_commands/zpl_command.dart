@@ -66,13 +66,28 @@ class FieldSeparator extends ZplCommand {
 
 /// Used in elements such as [ZplText] to print element-specific data to a
 /// label.
+///
+/// Hex-escapes (with `^FH`) every caret, tilde, and underscore in [data], so
+/// the printer prints them instead of reading them as commands.
 class FieldData extends ZplCommand {
   const FieldData(this.data);
 
   final String data;
 
+  static const _hexEscapes = {'^': '_5E', '~': '_7E', '_': '_5F'};
+
   @override
-  List<String> get commandParams => [data];
+  String get zpl => '^FH${super.zpl}';
+
+  @override
+  List<String> get commandParams => [_hexEscapedData];
+
+  String get _hexEscapedData {
+    return data
+        .split('')
+        .map((character) => _hexEscapes[character] ?? character)
+        .join();
+  }
 
   @override
   String get commandPrefix => 'FD';

@@ -21,7 +21,7 @@ class MockZplDataElement extends ZplDataElement {
 void main() {
   test('`ZplDataElement` core functionality', () {
     final expectedStart = '^FO24,50,${ZplAlignment.left.zpl}';
-    const expectedEnd = '^FD<data>^FS';
+    const expectedEnd = '^FH^FD<data>^FS';
     final expectedCommand = const MockZplCommand(a: 1).zpl;
 
     expect(const MockZplDataElement(0).toZpl(), '$expectedStart$expectedEnd');

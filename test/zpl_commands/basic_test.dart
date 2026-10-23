@@ -45,4 +45,49 @@ void main() {
       );
     });
   });
+
+  group('FieldData', () {
+    test('Data with nothing to escape', () {
+      expect(const FieldData('Hello, 123!').zpl, '^FH^FDHello, 123!');
+    });
+
+    test('Empty data', () {
+      expect(const FieldData('').zpl, '^FH^FD');
+    });
+
+    test('Caret is hex-escaped', () {
+      expect(const FieldData('a^b').zpl, '^FH^FDa_5Eb');
+    });
+
+    test('Tilde is hex-escaped', () {
+      expect(const FieldData('a~b').zpl, '^FH^FDa_7Eb');
+    });
+
+    test('Underscore is hex-escaped', () {
+      expect(const FieldData('a_b').zpl, '^FH^FDa_5Fb');
+    });
+
+    test('Every occurrence is hex-escaped', () {
+      expect(const FieldData('^^~~__').zpl, '^FH^FD_5E_5E_7E_7E_5F_5F');
+    });
+
+    test('Escape sequences in the data are themselves escaped', () {
+      expect(const FieldData('_5E').zpl, '^FH^FD_5F5E');
+    });
+
+    test('Commands in the data are escaped', () {
+      expect(const FieldData('^FS^XZ~JR').zpl, '^FH^FD_5EFS_5EXZ_7EJR');
+    });
+
+    test('Backslash is not escaped', () {
+      expect(const FieldData(r'a\&b').zpl, r'^FH^FDa\&b');
+    });
+
+    test('Non-ASCII characters are not escaped', () {
+      expect(
+        const FieldData('\u{15E}\u{17E}\u{1F600}').zpl,
+        '^FH^FD\u{15E}\u{17E}\u{1F600}',
+      );
+    });
+  });
 }
